@@ -1,0 +1,135 @@
+<h3>Customer Details</h3>
+<div class="container">
+  <div class="row">
+    <div class="form-bg">
+      <form [formGroup]='formDetails' (ngSubmit)="submitFormData(formDetails)">
+        <div class="col-5">
+          <label for="initials">initials</label>
+          <input type="text" class="form-control" formControlName="initials" required />
+          <span *ngIf="formDetails.controls['initials'].hasError('required')">
+            initials required
+          </span>
+
+        </div>
+        <br />
+        <div class="col-5">
+          <label for="salutation">salutation</label>
+          <select class="form-select" formControlName="salutation">
+            <option *ngFor="let data of salutationList" [ngValue]="data.value">
+              {{data.key}}
+            </option>
+          </select>
+          
+          <span *ngIf="formDetails.controls['gender'].hasError('required')">
+            gender required
+          </span>
+        </div>
+        <br />
+        <div class="col-5">
+          <label for="FirstName">First Name</label>
+          <input type="text" class="form-control" formControlName="firstname" required />
+          <span *ngIf="formDetails.controls['firstname'].hasError('required')">
+            First name required
+          </span>
+
+        </div>
+        <br />
+        <div class="col-5">
+          <label for="FirstName">Last Name</label>
+          <input type="text" class="form-control" formControlName="lastname" required />
+          <span *ngIf="formDetails.controls['lastname'].hasError('required')">
+            Last name required
+          </span>
+
+        </div>
+        <br />
+        <div class="col-5">
+          <label for="gender">gender</label>
+          <select class="form-select" formControlName="gender">
+            <option *ngFor="let gender of genderList" [ngValue]="gender.value">
+              {{gender.name}}
+            </option>
+          </select>
+          
+          <span *ngIf="formDetails.controls['gender'].hasError('required')">
+            gender required
+          </span>
+        </div>
+        <br />
+        <div class="col-5">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" formControlName="email" required />
+          <span *ngIf="formDetails.controls['email'].hasError('required')">
+            email required
+          </span>
+          <span *ngIf="formDetails.controls['email'].hasError('email')">
+            please enter valid email
+          </span>
+        </div>
+        <br />
+        <div class="col-5">
+          <label for="phone_Number">phone Number</label>
+          <input type="text" class="form-control" formControlName="phone_Number" required />
+          <span *ngIf="formDetails.controls['phone_Number'].hasError('required')">
+            phone_Number required
+          </span>
+          
+        </div>
+        <br />
+        <div class="col-5">
+          <label for="country">country</label>
+          <select class="form-select" formControlName="country_name">
+            <option *ngFor="let country of countryList" [ngValue]="country.countryCode">
+              {{country.countryName}}
+            </option>
+          </select>
+          <span *ngIf="formDetails.controls['country_name'].hasError('required')">
+            country name required
+          </span>
+        </div>
+        <br />
+        <div class="col-5">
+          <label for="language">primary language</label>
+          <select class="form-select" formControlName="primary_language">
+            <option *ngFor="let language of languageList" [ngValue]="language.Code">
+              {{language.Name}}
+            </option>
+          </select>
+          <span *ngIf="formDetails.controls['primary_language'].hasError('required')">
+            primary language required
+          </span>
+        </div>
+        <br />
+        <div class="col-5">
+          <label for="currency">currency</label>
+          <select class="form-select" formControlName="currency">
+            <option *ngFor="let currency of currencyList" [ngValue]="currency">
+              {{currency}}
+            </option>
+          </select>
+          <span *ngIf="formDetails.controls['currency'].hasError('required')">
+            currency required
+          </span>
+        </div>
+        <div class="col-5">
+          <label for="balance">balance</label>
+          <input type="text" class="form-control" formControlName="balance" required />
+          <span *ngIf="formDetails.controls['balance'].hasError('required')">
+            balance required
+          </span>
+
+        </div>
+        <br />
+        <br />
+        <div class="col-5">
+          <button type="submit" class="btn btn-primary" *ngIf="CustomerId=='0'"
+            [disabled]="!formDetails.valid">Create</button>
+          <button type="submit" class="btn btn-primary" *ngIf="CustomerId!='0'"
+            [disabled]="!formDetails.valid">Update</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-primary" (click)="ResetForm()">Reset</button> &nbsp;
+          <a class="btn btn-primary" routerLink="/Customer">Back</a><br />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
