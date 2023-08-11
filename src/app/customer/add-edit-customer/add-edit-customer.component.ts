@@ -38,17 +38,20 @@ export class AddEditCustomerComponent implements OnInit, AfterViewInit {
   }
 
   emp!: CustomerModule;
-  CustomerId = "";
+  CustomerId = "0";
   genderList: gender[] = [{ name: "Male", value: "m" }, { name: "Female", value: "f" }];
 
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.CustomerId = params['id'];
+      if (params != null && params["id"] != undefined)
+        this.CustomerId = params['id'];
+      else
+      this.CustomerId ="0";
     });
   }
   ngAfterViewInit() {
-    if (this.CustomerId != "" && this.CustomerId != "0") {
+    if (this.CustomerId != "0" &&  this.CustomerId != undefined) {
       this.service.getCustomer(this.CustomerId).subscribe(res => {
         this.formDetails.patchValue({
           salutation: res.salutation,
@@ -67,6 +70,7 @@ export class AddEditCustomerComponent implements OnInit, AfterViewInit {
     }
   }
   submitFormData(regForm: any) {
+    debugger;
     console.log(regForm);
 
     if (this.CustomerId != "" && this.CustomerId != "0") {
@@ -99,8 +103,8 @@ export class AddEditCustomerComponent implements OnInit, AfterViewInit {
         gender: regForm.get('gender').value,
         lastname: regForm.get('lastname').value,
         email: regForm.get('email').value,
-        country_name: regForm.get('country_code').value,
-        primary_language: regForm.get('primary_language_code').value,
+        country_name: regForm.get('country_name').value,
+        primary_language: regForm.get('primary_language').value,
         balance: regForm.get('balance').value,
         phone_Number: regForm.get('phone_Number').value,
         currency: regForm.get('currency').value
@@ -120,7 +124,7 @@ export class AddEditCustomerComponent implements OnInit, AfterViewInit {
   }
 
   ResetForm() {
-    this.CustomerId="";
+    this.CustomerId = "0";
     this.formDetails.reset();
   }
 
